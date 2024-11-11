@@ -1,0 +1,64 @@
+Here's a breakdown of algorithms for **Next Fit** and **Worst Fit** memory allocation strategies, along with **First Fit** and **Best Fit** for completeness.
+
+---
+
+### 1. **Next Fit Algorithm**:
+The **Next Fit** algorithm is a variation of First Fit, where it resumes searching for the next available memory block from where the last allocation occurred.
+
+**Algorithm**:
+1. Initialize `lastAllocatedIndex = -1` to track the last allocated memory block.
+2. For each process in `processRequirements`:
+   - Start searching for an available memory block from `lastAllocatedIndex + 1` to the end.
+   - If an appropriate block is found, allocate the process, update `lastAllocatedIndex` to this block’s index, and stop searching.
+   - If no block is found from the current position to the end, restart from the beginning up to `lastAllocatedIndex` and repeat the allocation attempt.
+3. If no suitable memory block is found after a complete search, mark the process as unallocated.
+
+---
+
+### 2. **Worst Fit Algorithm**:
+The **Worst Fit** algorithm allocates each process to the largest available memory block to leave larger contiguous spaces for future allocations.
+
+**Algorithm**:
+1. For each process in `processRequirements`:
+   - Initialize `worstIndex = -1` and `worstFitSize = -1`.
+   - Search all memory blocks to find the block with the largest size that can accommodate the process (satisfies `block size >= process size`).
+   - If a suitable block is found, update `worstIndex` to the index of the block and `worstFitSize` to the remaining space after allocation.
+   - Allocate the process to the memory block at `worstIndex`.
+2. If no suitable block is found, mark the process as unallocated.
+
+---
+
+### 3. **First Fit Algorithm**:
+The **First Fit** algorithm scans the memory from the beginning for each process, allocating it to the first suitable memory block.
+
+**Algorithm**:
+1. For each process in `processRequirements`:
+   - Traverse the memory blocks from the start.
+   - If a block satisfies `block size >= process size` and is unallocated, allocate the process to this block and break out of the loop.
+2. If no suitable memory block is found during the search, mark the process as unallocated.
+
+---
+
+### 4. **Best Fit Algorithm**:
+The **Best Fit** algorithm allocates each process to the smallest memory block that can still fit the process, minimizing leftover space.
+
+**Algorithm**:
+1. For each process in `processRequirements`:
+   - Initialize `bestIndex = -1` and `bestFitSize = Integer.MAX_VALUE`.
+   - Search all memory blocks to find the smallest block that can accommodate the process (satisfies `block size >= process size`).
+   - If a suitable block is found, update `bestIndex` to the index of this block and `bestFitSize` to the remaining space after allocation.
+   - Allocate the process to the memory block at `bestIndex`.
+2. If no suitable block is found, mark the process as unallocated.
+
+---
+
+### Summary Table:
+
+| Fit Algorithm | Allocation Strategy                                               | Pros                                                   | Cons                                                 |
+|---------------|-------------------------------------------------------------------|--------------------------------------------------------|------------------------------------------------------|
+| **Next Fit**  | Resumes search from last allocated block                          | Can be faster than First Fit                           | May leave larger gaps in memory                      |
+| **Worst Fit** | Allocates process to the largest available block                  | Leaves larger spaces for future processes              | Tends to waste larger memory blocks                  |
+| **First Fit** | Allocates process to the first suitable block                     | Fast allocation                                        | May leave unutilized memory gaps                     |
+| **Best Fit**  | Allocates process to the smallest suitable block                  | Minimizes unused memory space in each block            | Tends to create many small, unusable memory segments |
+
+These algorithms manage memory by different strategies, each with unique trade-offs in terms of speed and memory utilization efficiency.

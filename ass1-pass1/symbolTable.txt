@@ -1,0 +1,20 @@
+0	START   101 	0
+1	        READ    N 	0
+2	        MOVER   BREG    ONE 	0
+3	        MOVEM   BREG    TERM 	0
+4	AGAIN   MULT    BREG    TERM 	0
+5	        MOVER   CREG    TERM 	0
+6	        ADD     CREG    ONE 	0
+7	        MOVEM   CREG    TERM 	0
+8	        COMP    CREG    N 	0
+9	        BC      LE      AGAIN 	0
+10	        DIV     BREG    TWO 	0
+11	        MOVEM   BREG    RESULT 	0
+12	        PRINT   RESULT 	0
+13	        STOP 	0
+14	N       DS      1 	0
+15	RESULT  DS      1 	0
+16	ONE     DC      1 	0
+17	TERM    DS      1 	0
+18	TWO     DC      2 	0
+19	        END	0

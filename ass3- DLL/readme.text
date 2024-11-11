@@ -1,0 +1,40 @@
+step1 : Compile java file
+javac -h . TestJNI.java
+
+step2 : Compile C file 
+gcc -c -fPIC -I /usr/lib/jvm/java-1.8.0-openjdk-amd64/include -I/usr/lib/jvm/java-1.8.0-openjdk-amd64/include/lunux TestJNI.c -o TestJNI.o
+
+step3 : compile and link jni.h and jni_md.h
+gcc -shared -fPIC -o libnative.so TestJNI.o -lc
+
+step4 : Run java file
+java -Djava.library.path=.TestJNI
+
+
+
+### 1. **Difference between Static Link Library (SLL) and Dynamic Link Library (DLL)**:
+
+| **Feature**                      | **Static Link Library (SLL)**                              | **Dynamic Link Library (DLL)**                              |
+|----------------------------------|------------------------------------------------------------|-------------------------------------------------------------|
+| **Linking Time**                 | Linked at compile time (during program build).            | Linked at runtime (when program is executed).               |
+| **File Size**                    | Increases executable size since library is included within the executable. | Smaller executable as library is separate from the executable. |
+| **Memory Usage**                 | Uses more memory as the library code is loaded into memory for every program that uses it. | Saves memory as DLL is shared among multiple programs using it. |
+| **Flexibility**                  | Less flexible, as updates to the library require recompiling the program. | More flexible, updates to the DLL don't require recompiling the program. |
+| **Performance**                  | May provide faster startup time as everything is prelinked. | May incur some overhead at runtime due to dynamic linking. |
+| **Error Handling**               | Errors are detected during compile-time.                   | Errors are detected during runtime when the DLL cannot be found or loaded. |
+
+### 2. **What is a Shared Object?**
+   - A **Shared Object (SO)** is a file format for shared libraries in UNIX-like operating systems (e.g., Linux). It is similar to a DLL (Dynamic Link Library) in Windows. Shared objects contain code and data that multiple programs can use simultaneously, which reduces memory usage and allows for efficient updates. When a program calls a function from a shared object, the operating system dynamically links the shared object at runtime.
+
+### 3. **Advantages and Disadvantages of Using JNI (Java Native Interface)**:
+
+#### **Advantages**:
+   - **Access to Native Code**: JNI allows Java programs to interact with code written in other programming languages (such as C or C++), enabling access to platform-specific features or existing native libraries.
+   - **Performance**: For performance-critical operations, JNI can be used to call optimized native code, bypassing some of the overhead of the Java Virtual Machine (JVM).
+   - **Reusability**: JNI allows the reuse of existing native libraries, reducing the need for re-implementing functionality in Java.
+
+#### **Disadvantages**:
+   - **Complexity**: Writing and maintaining JNI code can be complex, as it involves managing both Java and native code. It also requires understanding the intricacies of both programming languages and their memory management.
+   - **Portability Issues**: JNI code is platform-dependent. A program using JNI will not be fully portable across different operating systems without modification or recompilation of the native code.
+   - **Performance Overhead**: While JNI can improve performance in some cases, it also introduces additional overhead due to the need for transitioning between Java and native code, which may degrade performance in some scenarios.
+   - **Error Handling**: Debugging JNI code is more challenging, as errors in native code can cause crashes or undefined behavior in the Java application, which is harder to detect than pure Java errors.

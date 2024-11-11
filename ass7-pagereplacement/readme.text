@@ -1,0 +1,73 @@
+Algorithm
+1. FIFO :
+1. Start the process
+2. Read number of pages n
+3. Read number of pages no
+4. Read page numbers into an array a[i]
+5. Initialize avail[i]=0 .to check page hit
+6. Replace the page with circular queue, while re-placing check page availability in the frame
+Place avail[i]=1 if page is placed in the frame Count page faults
+7. Print the results.
+8. Stop the process.
+
+2. LEAST RECENTLY USED
+1.Start the process
+2. Declare the size
+3. Get the number of pages to be inserted
+4. Get the value
+5. Declare counter and stack
+6. Select the least recently used page by counter value
+7. Stack them according the selection.
+8. Display the values
+9. Stop the process
+
+3. OPTIMAL
+ALGORTHIM:
+1. Start Program
+2. Read Number Of Pages And Frames
+3.Read Each Page Value
+4. Search For Page In The Frames
+5. If Not Available Allocate Free Frame
+6. If No Frames Is Free Replace The Page With The Page That Is Least Used
+7.Print Page Number Of Page Faults
+8.Stop process.
+
+1. FIFO
+This is the simplest page replacement algorithm. In this algorithm, the operating system
+keeps track of all pages in the memory in a queue, the oldest page is in the front of the
+queue. When a page needs to be replaced page in the front of the queue is selected for
+removal.
+
+2. OPTIMAL PAGE REPLACEMENT ALGORITHM: Replace the page that will not be
+used for longest period of time as compared to the other pages in main memory. An optimal
+page replacement algorithm has lowest page fault rate of all algorithm. It is called as OPT
+or MIN.
+
+Here are concise answers to each question:
+
+1. **What is virtual memory?**  
+   Virtual memory is a memory management technique that gives an application the illusion of having a large, contiguous memory space by using disk storage to extend RAM.
+
+2. **Explain working of LRU page replacement algorithm**  
+   Least Recently Used (LRU) replaces the page that hasn’t been used for the longest time, based on the assumption that pages used recently are more likely to be used again soon.
+
+3. **Explain working of OPTIMAL page replacement algorithm**  
+   The Optimal page replacement algorithm replaces the page that won’t be used for the longest period in the future, minimizing page faults but requiring future knowledge.
+
+4. **Which Page replacement algorithm is best?**  
+   The Optimal algorithm is the best in minimizing page faults, but it’s not practical as it requires future knowledge. LRU is often preferred for real-world use.
+
+5. **Explain what is Belady’s Anomaly?**  
+   Belady's Anomaly is the counterintuitive situation where increasing the number of page frames leads to more page faults in FIFO page replacement.
+
+6. **Explain the scenario in which page replacement algorithm is used**  
+   Page replacement is used when there’s a page fault, meaning the required page isn’t in memory. The algorithm decides which page to remove from memory to make space for the new page.
+
+7. **Explain what is page fault?**  
+   A page fault occurs when a program tries to access a page that isn’t currently in physical memory, requiring it to be loaded from disk.
+
+8. **Explain what is paging scheme?**  
+   Paging is a memory management scheme that divides memory into fixed-size pages in physical memory and maps them to pages in virtual memory.
+
+9. **Explain what is counting-based page replacement algorithms?**  
+   Counting-based algorithms keep a count of each page’s usage and may replace pages based on usage frequency, such as LFU (Least Frequently Used) or MFU (Most Frequently Used).
